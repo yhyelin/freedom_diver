@@ -7,6 +7,7 @@ public class EventSystem : MonoBehaviour
 {
     public RawImage ri;
     private bool is_clear;
+    private bool is_fail;
 
     public void Clear() {
 
@@ -22,10 +23,16 @@ public class EventSystem : MonoBehaviour
         #endif
     }
 
+    public void Fail()
+    {
+        is_fail = true;
+    }
+
     // Start is called before the first frame update
     void Awake()
     {
         is_clear = false;
+        is_fail = true;
         ri.color = new Color(1f,1f,1f,0);
     }
 
@@ -38,6 +45,12 @@ public class EventSystem : MonoBehaviour
 
                 ri.color += new Color(0, 0, 0, 1 * Time.deltaTime);
             }
+        }
+
+        if (is_fail)
+        {
+            // fail ui for a few seconds
+            // over or retry
         }
 
     }
