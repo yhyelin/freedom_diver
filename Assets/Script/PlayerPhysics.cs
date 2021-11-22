@@ -9,7 +9,7 @@ public class PlayerPhysics : MonoBehaviour
     private Vector2 m_Move;
     private bool is_parachute;
     private Rigidbody rb;
-    
+    private int para_num = 0;
     
     public float force=5f;
     public float rotate_force = 30f;
@@ -25,6 +25,17 @@ public class PlayerPhysics : MonoBehaviour
     {
         m_Move = value.Get<Vector2>();
 
+    }
+
+    public void OnFire()
+    {
+        Debug.Log("fire");
+        if (para_num > 0&&!(is_parachute)) {
+
+            para_num--;
+            is_parachute = true;
+            Debug.Log("para open");
+        }
     }
 
     public void OnEscape() {
@@ -56,17 +67,27 @@ public class PlayerPhysics : MonoBehaviour
         }
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.tag);
+
+        if (other.gameObject.CompareTag("Parachute"))
+        {
+
+            para_num++;
+            other.gameObject.SetActive(false);
+        }
+    }
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
-        if (collision.gameObject.CompareTag("Clear")) {
+        if (collision.gameObject.CompareTag("Clear"))
+        {
 
-            EventSystem.GetComponent<EventSystem>().Clear();
-        }
-        if (collision.gameObject.CompareTag("Parachute")) {
-
-            is_parachute = true;
-            collision.gameObject.active = false;
+            if (is_parachute)
+            {
+                EventSystem.GetComponent<EventSystem>().Clear();
+            }
         }
     }
 
