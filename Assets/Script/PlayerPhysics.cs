@@ -9,8 +9,12 @@ public class PlayerPhysics : MonoBehaviour
     private Vector2 m_Move;
     private bool is_parachute;
     private Rigidbody rb;
-    
-    
+    private int para_num = 0;
+    private int point = 0;      // 포인트
+    private bool is_auto;       // 자동조정
+    private bool is_invincible; // 절대무적
+
+
     public float force=5f;
     public float rotate_force = 30f;
     public GameObject EventSystem;
@@ -18,6 +22,8 @@ public class PlayerPhysics : MonoBehaviour
     void Start()
     {
         is_parachute = false;
+        is_auto = false;
+        is_invincible = false;
         rb = gameObject.GetComponent<Rigidbody>();
     }
 
@@ -27,8 +33,19 @@ public class PlayerPhysics : MonoBehaviour
 
     }
 
-    public void OnEscape() {
+    public void OnFire()
+    {
+        Debug.Log("fire");
+        if (para_num > 0&&!(is_parachute)) {
 
+            para_num--;
+            is_parachute = true;
+            Debug.Log("para open");
+        }
+    }
+
+    public void OnEscape()
+    {
         EventSystem.GetComponent<EventSystem>().Over();
     }
 
@@ -56,17 +73,56 @@ public class PlayerPhysics : MonoBehaviour
         }
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.gameObject.tag);
+
+        if (other.gameObject.CompareTag("Parachute"))
+        {
+            para_num++;
+            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.CompareTag("Point"))
+        {
+            point++;    //포인트 단위 설정 필요
+            other.gameObject.SetActive(false);
+        }
+        else if (other.gameObject.CompareTag("Auto"))
+        {
+            is_auto = true;
+            // 위치 자동 조정 (아이템을 거쳐서 조정? 자석?)
+        }
+        else if (other.gameObject.CompareTag("Invincible"))
+        {
+            is_invincible = true;
+        }
+        else if (other.gameObject.CompareTag("Obstacle"))
+        {
+            if (!is_invincible) // &&!(is_auto)?
+            {
+                // EventSystem.GetComponent<EventSystem>().fail(); // not clear not over but fail
+            }
+            else
+            {
+                is_invincible = false;
+            }
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(collision.gameObject.tag);
-        if (collision.gameObject.CompareTag("Clear")) {
+        if (collision.gameObject.CompareTag("Clear"))
+        {
 
-            EventSystem.GetComponent<EventSystem>().Clear();
-        }
-        if (collision.gameObject.CompareTag("Parachute")) {
-
-            is_parachute = true;
-            collision.gameObject.active = false;
+            if (is_parachute)
+            {
+                EventSystem.GetComponent<EventSystem>().Clear();
+            }
+            else
+            {
+                // EventSystem.GetComponent<EventSystem>().fail();
+            }
         }
     }
 
