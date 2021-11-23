@@ -58,6 +58,7 @@
      <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
      <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
      <Compile Include="Assets\Script\PlayerPhysics.cs" />
+     <Compile Include="Assets\AurynSky\Gems Ultimate Pack\Scripts\pickupObject.cs" />
      <None Include="Assets\ParticleSystemsGuidelines.txt" />
      <None Include="Assets\AurynSky\Gems Ultimate Pack\READ ME.txt" />
      <None Include="Assets\SampleScenes\Shaders\Skybox-Procedural.shader" />
