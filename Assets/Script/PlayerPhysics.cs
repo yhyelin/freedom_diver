@@ -9,11 +9,15 @@ public class PlayerPhysics : MonoBehaviour
     private Vector2 m_Move;
     private bool is_parachute;
     private Rigidbody rb;
+    private AudioSource audio;
     private int para_num = 0;
     private int point = 0;      // 포인트
     private bool is_auto;       // 자동조정
     private bool is_invincible; // 절대무적
+    private float preset_y = 0.5f;
 
+    public Vector2 left_con_pos;
+    public Vector2 right_con_pos;
 
     public float force=5f;
     public float rotate_force = 30f;
@@ -25,10 +29,12 @@ public class PlayerPhysics : MonoBehaviour
         is_auto = false;
         is_invincible = false;
         rb = gameObject.GetComponent<Rigidbody>();
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
     public void OnMove(InputValue value)
     {
+
         m_Move = value.Get<Vector2>();
 
     }
@@ -40,6 +46,7 @@ public class PlayerPhysics : MonoBehaviour
 
             para_num--;
             is_parachute = true;
+            audio.Play();
             Debug.Log("para open");
         }
     }
@@ -52,7 +59,20 @@ public class PlayerPhysics : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (left_con_pos != new Vector2(0, 0) || right_con_pos != new Vector2(0, 0)) {
+
+            m_Move = left_con_pos + right_con_pos;
+
+        }
+
+//        Debug.Log(m_Move);
+
         rb.AddForce(transform.forward * force * m_Move.y);
+
+        
+
+
 
         if (is_parachute)
         {

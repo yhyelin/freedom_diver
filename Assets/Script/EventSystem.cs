@@ -9,6 +9,8 @@ public class EventSystem : MonoBehaviour
     private bool is_clear;
     private bool is_fail;
 
+    private AudioSource audio;
+
     public void Clear() {
 
         is_clear = true;
@@ -34,6 +36,7 @@ public class EventSystem : MonoBehaviour
         is_clear = false;
         is_fail = true;
         ri.color = new Color(1f,1f,1f,0);
+        audio = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
