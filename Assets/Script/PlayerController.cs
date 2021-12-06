@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
     public float force=5f;
     public float rotate_force = 30f;
     public GameObject EventSystem;
+    public GameObject ParaEffect;
     public GameObject WindEffect;
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
         is_auto = false;
         is_invincible = false;
         rb = gameObject.GetComponent<Rigidbody>();
-        ParaAudio = gameObject.GetComponent<AudioSource>();
+        ParaAudio = ParaEffect.GetComponent<AudioSource>();
         WindAudio = WindEffect.GetComponent<AudioSource>();
         WindAudio.Play();
     }
