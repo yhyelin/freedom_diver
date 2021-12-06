@@ -557,7 +557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4333507836982010, guid: c350023b68bece943928351ad0df5c3a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 225
+      value: 210
       objectReference: {fileID: 0}
     - target: {fileID: 4333507836982010, guid: c350023b68bece943928351ad0df5c3a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -758,6 +758,7 @@ MonoBehaviour:
   force: 5
   rotate_force: 5
   EventSystem: {fileID: 1204237759}
+  ParaEffect: {fileID: 0}
   WindEffect: {fileID: 2105515866}
 --- !u!82 &568404782
 AudioSource:
