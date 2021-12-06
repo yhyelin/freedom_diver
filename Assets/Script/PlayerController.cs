@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private AudioSource ParaAudio;
     private AudioSource WindAudio;
+    private AudioSource RipAudio;
     private int para_num = 0;
     private int point = 0;      // 포인트
     private bool is_auto;       // 자동조정
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     public GameObject EventSystem;
     public GameObject ParaEffect;
     public GameObject WindEffect;
+    public GameObject RipEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         ParaAudio = ParaEffect.GetComponent<AudioSource>();
         WindAudio = WindEffect.GetComponent<AudioSource>();
+        RipAudio = RipEffect.GetComponent<AudioSource>();
         WindAudio.Play();
     }
 
@@ -47,12 +50,18 @@ public class PlayerController : MonoBehaviour
     public void OnFire()
     {
         Debug.Log("fire");
-        if (para_num > 0&&!(is_parachute)) {
+        if (para_num > 0 && !(is_parachute))
+        {
 
             para_num--;
             is_parachute = true;
             ParaAudio.Play();
             Debug.Log("para open");
+        }
+        else if (is_parachute) {
+
+            is_parachute = false;
+            RipAudio.Play();
         }
     }
 
@@ -71,10 +80,6 @@ public class PlayerController : MonoBehaviour
 
         }
 
-
-        
-
-//        Debug.Log(m_Move);
 
         rb.AddForce(transform.forward * force * m_Move.y);
 
