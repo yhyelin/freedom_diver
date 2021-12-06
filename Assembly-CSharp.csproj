@@ -62,10 +62,10 @@
     <Compile Include="Assets\SampleScenes\Scripts\CameraSwitch.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\MenuSceneLoader.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\ParticleSceneControls.cs" />
+    <Compile Include="Assets\Script\ConrollerAction.cs" />
     <Compile Include="Assets\SampleScenes\Menu\Scripts\PauseMenu.cs" />
     <Compile Include="Assets\SampleScenes\Scripts\PlaceTargetWithMouse.cs" />
-    <Compile Include="Assets\Script\PlayerPhysics.cs" />
-    <Compile Include="Assets\Script\ConrollerAction.cs" />
+    <Compile Include="Assets\Script\PlayerController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ParticleSystemsGuidelines.txt" />

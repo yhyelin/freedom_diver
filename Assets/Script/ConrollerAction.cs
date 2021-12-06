@@ -20,16 +20,16 @@ public class ConrollerAction : MonoBehaviour
     {
         if (GetGrip()) {
 
-            player.GetComponent<PlayerPhysics>().OnFire();
+            player.GetComponent<PlayerController>().OnFire();
         }
         if (handType == SteamVR_Input_Sources.LeftHand)
         {
 
-            player.GetComponent<PlayerPhysics>().left_con_pos = this.gameObject.transform.localPosition+this.transform.parent.localPosition;
+            player.GetComponent<PlayerController>().left_con_pos = this.gameObject.transform.localPosition+this.transform.parent.localPosition;
         }
         else if (handType == SteamVR_Input_Sources.RightHand) {
 
-            player.GetComponent<PlayerPhysics>().right_con_pos = this.gameObject.transform.localPosition + this.transform.parent.localPosition;
+            player.GetComponent<PlayerController>().right_con_pos = this.gameObject.transform.localPosition + this.transform.parent.localPosition;
         }
     }
 
