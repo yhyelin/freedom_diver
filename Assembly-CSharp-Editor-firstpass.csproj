@@ -296,6 +296,9 @@
  <Reference Include="log4netPlastic">
  <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/PackageCache/com.unity.collab-proxy@1.9.0/Lib/Editor/PlasticSCM/log4netPlastic.dll</HintPath>
  </Reference>
+ <Reference Include="Valve.Newtonsoft.Json">
+ <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Assets/SteamVR/Input/Plugins/JSON.NET/Valve.Newtonsoft.Json.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
  <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/PackageCache/com.unity.visualscripting@1.6.1/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
  </Reference>
@@ -671,9 +674,6 @@
  <Reference Include="Unity.VisualStudio.Editor">
  <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.Timeline.Editor">
- <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
- </Reference>
  <Reference Include="Unity.Timeline">
  <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
  </Reference>
@@ -701,23 +701,41 @@
  <Reference Include="Unity.Rider.Editor">
  <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
  </Reference>
- <Reference Include="UnityEngine.UI">
- <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
- </Reference>
  <Reference Include="Unity.PlasticSCM.Editor">
  <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/Unity.PlasticSCM.Editor.dll</HintPath>
  </Reference>
- <Reference Include="Unity.VisualScripting.State">
- <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="Unity.VisualScripting.Core">
  <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/Unity.VisualScripting.Core.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Timeline.Editor">
+ <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.VisualScripting.State">
+ <HintPath>C:/Users/yhyel/OneDrive/바탕 화면/yanghyelin/unityproj/Library/ScriptAssemblies/Unity.VisualScripting.State.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
       <Project>{DF8AF812-86D5-EF2E-66E9-6E1687A94A5A}</Project>
       <Name>Assembly-CSharp-firstpass</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="SteamVR_Actions.csproj">
+      <Project>{9AE14800-A246-822A-7607-2030E5D43E12}</Project>
+      <Name>SteamVR_Actions</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="SteamVR.csproj">
+      <Project>{8ED087F0-DD13-885A-6D32-B023EC19E929}</Project>
+      <Name>SteamVR</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="SteamVR_Editor.csproj">
+      <Project>{47716E40-6956-4873-53BB-794BA5A55EB5}</Project>
+      <Name>SteamVR_Editor</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
     </ProjectReference>
   </ItemGroup>
