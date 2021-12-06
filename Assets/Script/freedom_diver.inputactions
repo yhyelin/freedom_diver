@@ -261,6 +261,28 @@
                 },
                 {
                     "name": "",
+                    "id": "5851a6b3-562c-4108-8c7e-7aaefe10562d",
+                    "path": "<XRController>{LeftHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9b62bb47-6b82-4915-beaf-58b856995fd5",
+                    "path": "<XRController>{RightHand}/triggerPressed",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XR",
+                    "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "3e138428-f977-4e10-b7f7-b9a94c19350b",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
