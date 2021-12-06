@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class EventSystem : MonoBehaviour
 {
-    public RawImage ri;
+    public RawImage Ri_clear, Ri_fail;
     private bool is_clear;
     private bool is_fail;
 
@@ -34,8 +34,9 @@ public class EventSystem : MonoBehaviour
     void Awake()
     {
         is_clear = false;
-        is_fail = true;
-        ri.color = new Color(1f,1f,1f,0);
+        is_fail = false;
+        Ri_clear.color = new Color(1f,1f,1f,0);
+        Ri_fail.color = new Color(1f, 1f, 1f, 0);
         audio = gameObject.GetComponent<AudioSource>();
     }
 
@@ -44,16 +45,19 @@ public class EventSystem : MonoBehaviour
     {
         if (is_clear) {
 
-            if (ri.color.a < 1) {
+            if (Ri_clear.color.a < 1) {
 
-                ri.color += new Color(0, 0, 0, 1 * Time.deltaTime);
+                Ri_clear.color += new Color(0, 0, 0, 1 * Time.deltaTime);
             }
         }
 
         if (is_fail)
         {
-            // fail ui for a few seconds
-            // over or retry
+            if (Ri_fail.color.a < 1)
+            {
+
+                Ri_fail.color += new Color(0, 0, 0, 1 * Time.deltaTime);
+            }
         }
 
     }

@@ -154,7 +154,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                // EventSystem.GetComponent<EventSystem>().fail();
+                EventSystem.GetComponent<EventSystem>().Fail();
             }
         }
     }
