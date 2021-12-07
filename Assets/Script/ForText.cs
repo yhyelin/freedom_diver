@@ -10,9 +10,9 @@ public class ForText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rt = this.gameObject.GetComponent<RectTransform>();
-        rt.sizeDelta = new Vector2(Screen.width, Screen.height);
-        rt.localPosition = new Vector3(-Screen.width / 20, -Screen.height / 15);
+        //rt = this.gameObject.GetComponent<RectTransform>();
+        //rt.sizeDelta = new Vector2(Screen.width, Screen.height);
+        //rt.localPosition = new Vector3(-Screen.width / 20, -Screen.height / 15);
     }
 
     // Update is called once per frame
