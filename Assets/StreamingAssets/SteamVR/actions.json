@@ -17,7 +17,8 @@
     },
     {
       "name": "/actions/default/in/GrabGrip",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "optional"
     },
     {
       "name": "/actions/default/in/Pose",
@@ -53,6 +54,11 @@
     },
     {
       "name": "/actions/default/in/SnapTurnRight",
+      "type": "boolean",
+      "requirement": "optional"
+    },
+    {
+      "name": "/actions/default/in/Trigger",
       "type": "boolean",
       "requirement": "optional"
     },

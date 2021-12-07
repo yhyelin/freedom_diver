@@ -6,8 +6,10 @@ using Valve.VR;
 public class ConrollerAction : MonoBehaviour
 {
     public SteamVR_Input_Sources handType;
-    public SteamVR_Action_Boolean grip;
+    public SteamVR_Action_Boolean trigger;
     public GameObject player;
+
+    private static bool is_pull=false;
 
     // Start is called before the first frame update
     void Awake()
@@ -18,9 +20,17 @@ public class ConrollerAction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GetGrip()) {
+        if (GetGrip())
+        {
+            if (!is_pull)
+            {
+                is_pull = true;
+                player.GetComponent<PlayerController>().OnFire();
+            }
+        }
+        else {
 
-            player.GetComponent<PlayerController>().OnFire();
+            is_pull = false;
         }
         if (handType == SteamVR_Input_Sources.LeftHand)
         {
@@ -35,6 +45,6 @@ public class ConrollerAction : MonoBehaviour
 
     public bool GetGrip() {
 
-        return grip.GetState(handType);
+        return trigger.GetState(handType);
     }
 }

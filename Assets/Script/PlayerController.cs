@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         WindAudio.volume = (Mathf.Abs(rb.velocity.y)+10) / 70;
         if (left_con_pos != new Vector2(0, 0) || right_con_pos != new Vector2(0, 0)) {
 
-            m_Move = left_con_pos + right_con_pos;
+            m_Move = left_con_pos + right_con_pos-new Vector2(0,1.5f);
 
         }
 
@@ -102,6 +102,12 @@ public class PlayerController : MonoBehaviour
         if(m_Move.x>0) {
 
             transform.Rotate(0, rotate_force * Time.deltaTime, 0);
+        }
+
+        //버그방지
+        if (transform.position.y < 3f) {
+
+            transform.position = new Vector3(transform.position.x,3, transform.position.z);
         }
     }
 
@@ -157,6 +163,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+
             EventSystem.GetComponent<EventSystem>().Fail();
         }
     }
