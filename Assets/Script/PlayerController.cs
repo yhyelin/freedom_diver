@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 right_con_pos;
 
     public float force=10f;
-    public float rotate_force = 30f;
+    public float rotate_force = 60f;
     public GameObject EventSystem;
     public GameObject ParaEffect;
     public GameObject WindEffect;
@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
         WindAudio.volume = (Mathf.Abs(rb.velocity.y)+10) / 70;
         if (left_con_pos != new Vector2(0, 0) || right_con_pos != new Vector2(0, 0)) {
 
-            m_Move = left_con_pos + right_con_pos-new Vector2(0,1.5f);
+            m_Move = left_con_pos + right_con_pos;
 
         }
 
@@ -105,9 +105,9 @@ public class PlayerController : MonoBehaviour
         }
 
         //버그방지
-        if (transform.position.y < 3f) {
+        if (transform.position.y < 2f) {
 
-            transform.position = new Vector3(transform.position.x,3, transform.position.z);
+            transform.position = new Vector3(transform.position.x,2, transform.position.z);
         }
     }
 
