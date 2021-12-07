@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class EventSystem : MonoBehaviour
 {
-    public RawImage Ri_clear, Ri_fail;
-    public Text text;
+    public RawImage[] Ri_clear, Ri_fail;
+    public Text[] text;
     private bool is_clear;
     private bool is_fail;
     private int score;
@@ -42,15 +42,15 @@ public class EventSystem : MonoBehaviour
     {
         is_clear = false;
         is_fail = false;
-        Ri_clear.color = new Color(1f,1f,1f,0);
-        Ri_fail.color = new Color(1f, 1f, 1f, 0);
+        for (int t = 0; t < Ri_clear.Length; t++)   Ri_clear[t].color = new Color(1f,1f,1f,0);
+        for (int t = 0; t < Ri_fail.Length; t++)    Ri_fail[t].color = new Color(1f, 1f, 1f, 0);
         audio = gameObject.GetComponent<AudioSource>();
         score = 0;
     }
 
     private void Update()
     {
-        text.text="Score:"+score.ToString();
+        for (int t = 0; t < text.Length; t++)  text[t].text="Score:"+score.ToString();
     }
 
     // Update is called once per frame
@@ -58,19 +58,27 @@ public class EventSystem : MonoBehaviour
     {
         if (is_clear) {
 
-            if (Ri_clear.color.a < 1) {
+            for (int t = 0; t < Ri_clear.Length; t++) {
+                if (Ri_clear[t].color.a < 1)
+                {
 
-                Ri_clear.color += new Color(0, 0, 0, 1 * Time.deltaTime);
+                    Ri_clear[t].color += new Color(0, 0, 0, 1 * Time.deltaTime);
+                }
             }
+            
         }
 
         if (is_fail)
         {
-            if (Ri_fail.color.a < 1)
-            {
+            for (int t = 0; t < Ri_fail.Length; t++) {
+                if (Ri_fail[t].color.a < 1)
+                {
 
-                Ri_fail.color += new Color(0, 0, 0, 1 * Time.deltaTime);
+                    Ri_fail[t].color += new Color(0, 0, 0, 1 * Time.deltaTime);
+                }
+
             }
+                
         }
 
     }

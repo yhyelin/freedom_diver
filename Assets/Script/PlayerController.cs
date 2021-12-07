@@ -16,13 +16,15 @@ public class PlayerController : MonoBehaviour
     private bool is_auto;       // 자동조정
     private bool is_invincible; // 절대무적
     private float preset_y = 0.5f;
+    private float hori_resist = 0.3f;
+    private EventSystem es;
 
     public Vector2 left_con_pos;
     public Vector2 right_con_pos;
 
-    public float force=10f;
-    public float rotate_force = 60f;
-    public GameObject EventSystem;
+    public float force=1f;
+    public float rotate_force = 1f;
+    public GameObject ev;
     public GameObject ParaEffect;
     public GameObject WindEffect;
     public GameObject RipEffect;
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
         ParaAudio = ParaEffect.GetComponent<AudioSource>();
         WindAudio = WindEffect.GetComponent<AudioSource>();
         RipAudio = RipEffect.GetComponent<AudioSource>();
+        es = ev.GetComponent<EventSystem>();
         WindAudio.Play();
     }
 
@@ -66,8 +69,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnEscape()
     {
-        EventSystem.GetComponent<EventSystem>().Over();
+        es.Over();
     }
+
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -80,7 +85,7 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        rb.AddForce(transform.forward * force * m_Move.y);
+        rb.AddForce(transform.forward * force * m_Move.y-new Vector3(rb.velocity.x, 0,rb.velocity.z)* hori_resist);
 
         
 
@@ -95,18 +100,14 @@ public class PlayerController : MonoBehaviour
         }
 
 
-        if (m_Move.x < 0)
-        {
-            transform.Rotate(0, -rotate_force*Time.deltaTime, 0);
-        }
-        if(m_Move.x>0) {
 
-            transform.Rotate(0, rotate_force * Time.deltaTime, 0);
-        }
+        transform.Rotate(new Vector3(0, 1f* m_Move.x, 0));
+        //transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles + new Vector3(0, m_Move.x * rotate_force * Time.deltaTime, 0) );
+
 
         //버그방지
         if (transform.position.y < 2f) {
-
+            es.Fail();
             transform.position = new Vector3(transform.position.x,2, transform.position.z);
         }
     }
@@ -119,24 +120,24 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Parachute"))
         {
             para_num++;
-            EventSystem.GetComponent<EventSystem>().Point(100);
+            es.Point(100);
             other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Point"))
         {
-            EventSystem.GetComponent<EventSystem>().Point(200);
+            es.Point(200);
             other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Auto"))
         {
-            EventSystem.GetComponent<EventSystem>().Point(100);
+            es.Point(100);
             is_auto = true;
             other.gameObject.SetActive(false);
             // 위치 자동 조정 (아이템을 거쳐서 조정? 자석?)
         }
         else if (other.gameObject.CompareTag("Invincible"))
         {
-            EventSystem.GetComponent<EventSystem>().Point(100);
+            es.Point(100);
             is_invincible = true;
             other.gameObject.SetActive(false);
         }
@@ -158,13 +159,13 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Clear")&& is_parachute)
         {
 
-            EventSystem.GetComponent<EventSystem>().Clear();
+            es.Clear();
 
         }
         else
         {
 
-            EventSystem.GetComponent<EventSystem>().Fail();
+            es.Fail();
         }
     }
 
