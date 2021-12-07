@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class EventSystem : MonoBehaviour
 {
     public RawImage Ri_clear, Ri_fail;
+    public Text text;
     private bool is_clear;
     private bool is_fail;
+    private int score;
 
     private AudioSource audio;
 
@@ -27,7 +29,12 @@ public class EventSystem : MonoBehaviour
 
     public void Fail()
     {
-        is_fail = true;
+        if(!is_clear)   is_fail = true;
+    }
+
+    public void Point(int point=100) {
+
+        score += point;
     }
 
     // Start is called before the first frame update
@@ -38,6 +45,12 @@ public class EventSystem : MonoBehaviour
         Ri_clear.color = new Color(1f,1f,1f,0);
         Ri_fail.color = new Color(1f, 1f, 1f, 0);
         audio = gameObject.GetComponent<AudioSource>();
+        score = 0;
+    }
+
+    private void Update()
+    {
+        text.text="Score:"+score.ToString();
     }
 
     // Update is called once per frame

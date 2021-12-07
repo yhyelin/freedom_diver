@@ -13,7 +13,6 @@ public class PlayerController : MonoBehaviour
     private AudioSource WindAudio;
     private AudioSource RipAudio;
     private int para_num = 0;
-    private int point = 0;      // 포인트
     private bool is_auto;       // 자동조정
     private bool is_invincible; // 절대무적
     private float preset_y = 0.5f;
@@ -21,7 +20,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 left_con_pos;
     public Vector2 right_con_pos;
 
-    public float force=5f;
+    public float force=10f;
     public float rotate_force = 30f;
     public GameObject EventSystem;
     public GameObject ParaEffect;
@@ -114,21 +113,26 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Parachute"))
         {
             para_num++;
+            EventSystem.GetComponent<EventSystem>().Point(100);
             other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Point"))
         {
-            point++;    //포인트 단위 설정 필요
+            EventSystem.GetComponent<EventSystem>().Point(200);
             other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Auto"))
         {
+            EventSystem.GetComponent<EventSystem>().Point(100);
             is_auto = true;
+            other.gameObject.SetActive(false);
             // 위치 자동 조정 (아이템을 거쳐서 조정? 자석?)
         }
         else if (other.gameObject.CompareTag("Invincible"))
         {
+            EventSystem.GetComponent<EventSystem>().Point(100);
             is_invincible = true;
+            other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
@@ -145,17 +149,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Clear"))
+        if (collision.gameObject.CompareTag("Clear")&& is_parachute)
         {
 
-            if (is_parachute)
-            {
-                EventSystem.GetComponent<EventSystem>().Clear();
-            }
-            else
-            {
-                EventSystem.GetComponent<EventSystem>().Fail();
-            }
+            EventSystem.GetComponent<EventSystem>().Clear();
+
+        }
+        else
+        {
+            EventSystem.GetComponent<EventSystem>().Fail();
         }
     }
 

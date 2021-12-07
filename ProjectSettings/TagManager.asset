@@ -7,6 +7,8 @@ TagManager:
   - Clear
   - Ground
   - Parachute
+  - Point
+  - Invincible
   layers:
   - Default
   - TransparentFX
