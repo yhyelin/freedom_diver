@@ -10,11 +10,18 @@ public class EventSystem : MonoBehaviour
     private bool is_clear;
     private bool is_fail;
     private int score;
+    private float timer;
 
     private AudioSource audio;
 
-    public void Clear() {
 
+    private void Final_score() {
+
+        score+=(int)(5000f / timer);
+    }
+
+    public void Clear() {
+        Final_score();
         is_clear = true;
     }
 
@@ -29,7 +36,7 @@ public class EventSystem : MonoBehaviour
 
     public void Fail()
     {
-        if(!is_clear)   is_fail = true;
+        if (!is_clear)   is_fail = true;
     }
 
     public void Point(int point=100) {
@@ -46,16 +53,29 @@ public class EventSystem : MonoBehaviour
         for (int t = 0; t < Ri_fail.Length; t++)    Ri_fail[t].color = new Color(1f, 1f, 1f, 0);
         audio = gameObject.GetComponent<AudioSource>();
         score = 0;
+        timer = 0f;
     }
 
     private void Update()
     {
-        for (int t = 0; t < text.Length; t++)  text[t].text="Score:"+score.ToString();
+        if (!is_fail) {
+
+            for (int t = 0; t < text.Length; t++) {
+                text[t].text = "Score: " + score.ToString()+"\n";
+                text[t].text += "Time Bonus: " + (int)(5000f / timer);
+            }
+            
+        }
+        
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!is_clear&&!is_fail) {
+            timer += Time.deltaTime;
+        }
+            
         if (is_clear) {
 
             for (int t = 0; t < Ri_clear.Length; t++) {

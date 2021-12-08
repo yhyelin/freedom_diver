@@ -13,9 +13,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource WindAudio;
     private AudioSource RipAudio;
     private int para_num = 0;
-    private bool is_auto;       // 자동조정
     private bool is_invincible; // 절대무적
-    private float preset_y = 0.5f;
     private float hori_resist = 0.3f;
     private EventSystem es;
 
@@ -32,7 +30,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         is_parachute = false;
-        is_auto = false;
         is_invincible = false;
         rb = gameObject.GetComponent<Rigidbody>();
         ParaAudio = ParaEffect.GetComponent<AudioSource>();
@@ -128,13 +125,6 @@ public class PlayerController : MonoBehaviour
             es.Point(200);
             other.gameObject.SetActive(false);
         }
-        else if (other.gameObject.CompareTag("Auto"))
-        {
-            es.Point(100);
-            is_auto = true;
-            other.gameObject.SetActive(false);
-            // 위치 자동 조정 (아이템을 거쳐서 조정? 자석?)
-        }
         else if (other.gameObject.CompareTag("Invincible"))
         {
             es.Point(100);
@@ -143,9 +133,9 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
-            if (!is_invincible) // &&!(is_auto)?
+            if (!is_invincible)
             {
-                // EventSystem.GetComponent<EventSystem>().fail(); // not clear not over but fail
+                es.Fail(); // not clear not over but fail
             }
             else
             {
