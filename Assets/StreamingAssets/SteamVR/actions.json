@@ -13,7 +13,7 @@
     {
       "name": "/actions/default/in/GrabPinch",
       "type": "boolean",
-      "requirement": "optional"
+      "requirement": "suggested"
     },
     {
       "name": "/actions/default/in/GrabGrip",
@@ -99,6 +99,10 @@
     },
     {
       "name": "/actions/mixedreality",
+      "usage": "single"
+    },
+    {
+      "name": "/actions/NewSet",
       "usage": "single"
     }
   ],
