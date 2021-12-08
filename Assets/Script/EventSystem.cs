@@ -58,13 +58,22 @@ public class EventSystem : MonoBehaviour
 
     private void Update()
     {
-        if (!is_fail) {
+        if (!is_fail)
+        {
 
-            for (int t = 0; t < text.Length; t++) {
-                text[t].text = "Score: " + score.ToString()+"\n";
+            for (int t = 0; t < text.Length; t++)
+            {
+                text[t].text = "Score: " + score.ToString() + "\n";
                 text[t].text += "Time Bonus: " + (int)(5000f / timer);
             }
-            
+
+        }
+        else {
+
+            for (int t = 0; t < text.Length; t++)
+            {
+                text[t].text = "";
+            }
         }
         
     }

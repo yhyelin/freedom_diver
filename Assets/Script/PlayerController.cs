@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour
     private AudioSource ParaAudio;
     private AudioSource WindAudio;
     private AudioSource RipAudio;
+    private AudioSource ItemAudio;
     private int para_num = 0;
     private bool is_invincible; // 절대무적
     private float hori_resist = 0.3f;
     private EventSystem es;
+    private float bug_fail_timer;
 
     public Vector2 left_con_pos;
     public Vector2 right_con_pos;
@@ -26,6 +28,7 @@ public class PlayerController : MonoBehaviour
     public GameObject ParaEffect;
     public GameObject WindEffect;
     public GameObject RipEffect;
+    public GameObject ItemEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +38,10 @@ public class PlayerController : MonoBehaviour
         ParaAudio = ParaEffect.GetComponent<AudioSource>();
         WindAudio = WindEffect.GetComponent<AudioSource>();
         RipAudio = RipEffect.GetComponent<AudioSource>();
+        ItemAudio = ItemEffect.GetComponent<AudioSource>();
         es = ev.GetComponent<EventSystem>();
         WindAudio.Play();
+        bug_fail_timer = 0;
     }
 
     public void OnMove(InputValue value)
@@ -103,10 +108,20 @@ public class PlayerController : MonoBehaviour
 
 
         //버그방지
-        if (transform.position.y < 2f) {
-            es.Fail();
-            transform.position = new Vector3(transform.position.x,2, transform.position.z);
+        if (transform.position.y < 4f) {
+            bug_fail_timer += Time.deltaTime;
+            if (transform.position.y < 2f)
+            {
+                es.Fail();
+                transform.position = new Vector3(transform.position.x, 2, transform.position.z);
+            }
+
+            if (bug_fail_timer > 3f) {
+
+                es.Fail();
+            }
         }
+        
     }
 
 
@@ -118,17 +133,20 @@ public class PlayerController : MonoBehaviour
         {
             para_num++;
             es.Point(100);
+            ItemAudio.Play();
             other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Point"))
         {
             es.Point(200);
+            ItemAudio.Play();
             other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Invincible"))
         {
             es.Point(100);
             is_invincible = true;
+            ItemAudio.Play();
             other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("Obstacle"))
